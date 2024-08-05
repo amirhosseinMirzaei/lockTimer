@@ -1,0 +1,43 @@
+package com.example.detox_clone;
+
+import android.app.ActivityManager;
+import android.content.Context;
+import android.os.Bundle;
+import androidx.annotation.NonNull;
+import io.flutter.embedding.android.FlutterActivity;
+import io.flutter.embedding.engine.FlutterEngine;
+import io.flutter.plugin.common.MethodChannel;
+
+public class MainActivity extends FlutterActivity {
+    private static final String CHANNEL = "com.example.detox_clone/lock";
+
+    @Override
+    public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
+        super.configureFlutterEngine(flutterEngine);
+        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
+                .setMethodCallHandler(
+                        (call, result) -> {
+                            if (call.method.equals("startLockTask")) {
+                                startLockTaskMode();
+                                result.success(null);
+                            } else if (call.method.equals("stopLockTask")) {
+                                stopLockTaskMode();
+                                result.success(null);
+                            } else {
+                                result.notImplemented();
+                            }
+                        }
+                );
+    }
+
+    private void startLockTaskMode() {
+        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        if (am.getLockTaskModeState() == ActivityManager.LOCK_TASK_MODE_NONE) {
+            startLockTask();
+        }
+    }
+
+    private void stopLockTaskMode() {
+        stopLockTask();
+    }
+}
