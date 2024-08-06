@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:async';
+
 void main() {
   runApp(DetoxCloneApp());
 }
@@ -20,23 +28,10 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
+class _HomeScreenState extends State<HomeScreen> {
   static const platform = MethodChannel('com.example.timer/lock');
   Timer? _timer;
-  int _start = 30; // Countdown seconds
-
-@override
-  void initState() {
-    // TODO: implement initState
-  WidgetsBinding.instance.removeObserver(this);
-    super.initState();
-  }
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
+  int _start = 10; // Countdown seconds
 
   @override
   Widget build(BuildContext context) {
@@ -63,25 +58,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     );
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    if (state == AppLifecycleState.paused ||
-        state == AppLifecycleState.detached ||
-        state == AppLifecycleState.inactive) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => DetoxCloneScreen()),
-      );
-    }
-  }
-
   void _startLockDevice() {
     _startCountdown();
     _lockDevice();
   }
 
   void _startCountdown() {
-    _start = 30;
+    _start = 10;
     const oneSec = const Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
@@ -117,19 +100,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   }
 }
 
-class DetoxCloneScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Detox Clone'),
-      ),
-      body: Center(
-        child: Text('Detox Clone Content'),
-      ),
-    );
-  }
-}
+
 
 // ios code
 
