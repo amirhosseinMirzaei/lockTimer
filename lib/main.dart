@@ -25,7 +25,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   Timer? _timer;
   int _start = 30; // Countdown seconds
 
-
+@override
+  void initState() {
+    // TODO: implement initState
+  WidgetsBinding.instance.removeObserver(this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
