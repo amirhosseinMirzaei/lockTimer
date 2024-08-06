@@ -2,13 +2,17 @@ package com.example.timer;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 public class OverlayService extends Service {
     private View overlayView;
+    private Handler handler = new Handler();
+    private int countdownTime = 10; // Change this value to match your initial countdown time
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -30,6 +34,25 @@ public class OverlayService extends Service {
 
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         wm.addView(overlayView, params);
+
+        // Start the countdown
+        startCountdown();
+    }
+
+    private void startCountdown() {
+        final TextView timerTextView = overlayView.findViewById(R.id.overlay_timer);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (countdownTime > 0) {
+                    timerTextView.setText(String.valueOf(countdownTime));
+                    countdownTime--;
+                    handler.postDelayed(this, 1000);
+                } else {
+                    stopSelf();
+                }
+            }
+        }, 1000);
     }
 
     @Override
@@ -40,5 +63,6 @@ public class OverlayService extends Service {
             wm.removeView(overlayView);
             overlayView = null;
         }
+        handler.removeCallbacksAndMessages(null);
     }
 }
