@@ -10,7 +10,7 @@ import Flutter
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         let controller = window?.rootViewController as! FlutterViewController
-        let lockChannel = FlutterMethodChannel(name: "com.example.detox_clone/lock",
+        let lockChannel = FlutterMethodChannel(name: "com.example.timer/lock",
                                                binaryMessenger: controller.binaryMessenger)
 
         lockChannel.setMethodCallHandler { (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in

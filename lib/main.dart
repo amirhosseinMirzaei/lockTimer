@@ -20,10 +20,12 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   static const platform = MethodChannel('com.example.timer/lock');
   Timer? _timer;
   int _start = 30; // Countdown seconds
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,18 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.detached ||
+        state == AppLifecycleState.inactive) {
+
+      SystemNavigator.pop();
+      runApp(DetoxCloneApp());
+    }
   }
 
   void _startLockDevice() {
@@ -92,18 +106,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-
 // ios code
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'dart:async';
-//
 // void main() {
 //   runApp(DetoxCloneApp());
 // }
 //
-// class DetoxCloneApp extends StatelessWidget {
+// class DetoxCloneApp extends StatelessWidget with WidgetsBindingObserver{
 //   @override
 //   Widget build(BuildContext context) {
 //     return MaterialApp(
@@ -118,9 +127,12 @@ class _HomeScreenState extends State<HomeScreen> {
 // }
 //
 // class _HomeScreenState extends State<HomeScreen> {
-//   static const platform = MethodChannel('com.example.detox_clone/lock');
+//   static const platform = MethodChannel('com.example.timer/lock');
 //   Timer? _timer;
 //   int _start = 10; // Countdown seconds
+//
+//
+//
 //
 //   @override
 //   Widget build(BuildContext context) {
@@ -147,6 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //     );
 //   }
 //
+//
 //   void _startLockDevice() {
 //     _startCountdown();
 //     _lockDevice();
@@ -157,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //     const oneSec = const Duration(seconds: 1);
 //     _timer = Timer.periodic(
 //       oneSec,
-//           (Timer timer) {
+//       (Timer timer) {
 //         if (_start == 0) {
 //           setState(() {
 //             timer.cancel();
@@ -188,5 +201,3 @@ class _HomeScreenState extends State<HomeScreen> {
 //     }
 //   }
 // }
-
-
