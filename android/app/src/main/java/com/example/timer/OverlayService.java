@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 public class OverlayService extends Service {
     private View overlayView;
@@ -25,8 +24,8 @@ public class OverlayService extends Service {
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                -3
         );
 
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
