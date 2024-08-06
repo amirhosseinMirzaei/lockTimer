@@ -21,9 +21,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const platform = MethodChannel('com.example.detox_clone/lock');
+  static const platform = MethodChannel('com.example.timer/lock');
   Timer? _timer;
-  int _start = 10; // Countdown seconds
+  int _start = 30; // Countdown seconds
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _startCountdown() {
-    _start = 10;
+    _start = 30;
     const oneSec = const Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,

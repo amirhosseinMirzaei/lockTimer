@@ -1,4 +1,4 @@
-package com.example.detox_clone;
+package com.example.timer;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -7,9 +7,12 @@ import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.plugin.common.MethodChannel;
+import android.content.ComponentName;
+import android.content.Context;
+import android.app.admin.DevicePolicyManager;
 
 public class MainActivity extends FlutterActivity {
-    private static final String CHANNEL = "com.example.detox_clone/lock";
+    private static final String CHANNEL = "com.example.timer/lock";
 
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
@@ -36,6 +39,7 @@ public class MainActivity extends FlutterActivity {
             startLockTask();
         }
     }
+
 
     private void stopLockTaskMode() {
         stopLockTask();

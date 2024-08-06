@@ -1,4 +1,4 @@
-package com.example.detox_clone;
+package com.example.timer;
 
 import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;
