@@ -31,6 +31,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   WidgetsBinding.instance.removeObserver(this);
     super.initState();
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +69,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     if (state == AppLifecycleState.paused ||
         state == AppLifecycleState.detached ||
         state == AppLifecycleState.inactive) {
-
-      SystemNavigator.pop();
-      runApp(DetoxCloneApp());
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => DetoxCloneScreen()),
+      );
     }
   }
 
@@ -108,6 +114,20 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     } on PlatformException catch (e) {
       print("Failed to stop lock task: '${e.message}'.");
     }
+  }
+}
+
+class DetoxCloneScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Detox Clone'),
+      ),
+      body: Center(
+        child: Text('Detox Clone Content'),
+      ),
+    );
   }
 }
 
