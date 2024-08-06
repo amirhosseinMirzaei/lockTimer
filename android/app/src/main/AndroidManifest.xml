@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.locktimer">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.timer">
     <application
         android:label="timer"
         android:name="${applicationName}"
@@ -57,4 +57,5 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 </manifest>

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:async';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -86,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _lockDevice() async {
     try {
       await platform.invokeMethod('startLockTask');
+      await platform.invokeMethod('startOverlay');
     } on PlatformException catch (e) {
       print("Failed to start lock task: '${e.message}'.");
     }
@@ -94,11 +93,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _unlockDevice() async {
     try {
       await platform.invokeMethod('stopLockTask');
+      await platform.invokeMethod('stopOverlay');
     } on PlatformException catch (e) {
       print("Failed to stop lock task: '${e.message}'.");
     }
   }
 }
+
+
 
 
 
